@@ -1,6 +1,5 @@
 import './App.css';
 import Rotas from './Rotas';
-import { useState } from 'react';
 
 function App() {
   return (
