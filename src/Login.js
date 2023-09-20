@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import firebase from "./firebase";
-import { Link, useNavigate, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -22,12 +22,12 @@ const Login = () => {
                 setErrorMessage('Usuário não cadastrado e/ou senha incorreta!');
             });
 
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                setUser(user);
+        firebase.auth().onAuthStateChanged((u) => {
+            if (u) {
+                setUser(u);
                 console.log('User: ', user);
 
-                firebase.firestore().collection('users').doc(user.uid).get().then((doc) => {
+                firebase.firestore().collection('users').doc(u.uid).get().then((doc) => {
                     if (doc.exists) {
                         const data = doc.data();
                         navigate('/principal', { replace: true, state: { data } });
